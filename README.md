@@ -103,5 +103,3 @@ Quyidagi yo'nalishlar `auth:api` middleware bilan himoyalangan:
   ```
   Foydalanuvchini tizimdan chiqarish.
 
-
-- **Role ga qarab fayllarni korish:**

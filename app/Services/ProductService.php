@@ -21,6 +21,12 @@ class ProductService
                     $q->whereDate('created_at', $date->format('Y-m-d'));
                 }
             })
+            ->when($request->filled('id'), fn($q) => $q->where('id', $request->input('id')))
+            ->when($request->filled('id_from'), fn($q) => $q->where('id', '>=', $request->input('id_from')))
+            ->when($request->filled('id_to'), fn($q) => $q->where('id', '<=', $request->input('id_to')))
+            ->when($request->filled('id_from') && $request->filled('id_to'), function ($q) use ($request) {
+                $q->whereBetween('id', [$request->input('id_from'), $request->input('id_to')]);
+            })
             ->get();
     }
 

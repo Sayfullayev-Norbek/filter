@@ -9,7 +9,7 @@ Bu loyiha Laravelda qilingan
 
 ```bash
 git clone https://github.com/Sayfullayev-Norbek/filter.git
-cd taskuzinfocom
+cd filter
 ```
 
 ### 2. Muhitni Sozlash

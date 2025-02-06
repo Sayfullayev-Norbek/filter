@@ -37,5 +37,9 @@ Route::middleware(['auth:sanctum', 'role:seller|admin'])->group(function () {
     Route::delete('/products/{product}', [ProductController::class, 'destroy']);
 
     Route::get('/statistics', [StatisticsController::class, 'filteredStatistics']);
+    Route::get('/statistics/general', [StatisticsController::class, 'generalStatistics']);
+    Route::get('/statistics/by-type', [StatisticsController::class, 'byTypeStatistics']);
+    Route::get('/statistics/by-user', [StatisticsController::class, 'byUserStatistics']);
+    Route::get('/statistics/top-users', [StatisticsController::class, 'topUsersStatistics']);
 });
 

@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Product;
+use Illuminate\Support\Facades\DB;
 
 class StatisticsService
 {
@@ -33,5 +34,41 @@ class StatisticsService
             'total_discount_price' => $query->sum('discount_price'),
             'total_amount' => $query->sum('amount'),
         ];
+    }
+
+    /**
+     * @return array
+     */
+    public function generalStatistics(): array
+    {
+        return [
+            'total_products' => Product::count(),
+            'total_price' => Product::sum('price'),
+            'total_discount_price' => Product::sum('discount_price'),
+            'total_amount' => Product::sum('amount'),
+        ];
+    }
+
+    public function byTypeStatistics()
+    {
+        return Product::select('type', DB::raw('COUNT(*) as total'))
+            ->groupBy('type')
+            ->get();
+    }
+
+    public function byUserStatistics()
+    {
+        return Product::select('user_id', DB::raw('COUNT(*) as total'))
+            ->groupBy('user_id')
+            ->get();
+    }
+
+    public function topUsersStatistics()
+    {
+        return Product::select('user_id', DB::raw('COUNT(*) as total'))
+            ->groupBy('user_id')
+            ->orderByDesc('total')
+            ->limit(5)
+            ->get();
     }
 }

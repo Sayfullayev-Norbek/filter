@@ -3,12 +3,17 @@
 namespace App\Services;
 
 use App\Models\Product;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 class ProductService
 {
-    public function dashboard($request)
+    /**
+     * @param $request
+     * @return LengthAwarePaginator
+     */
+    public function dashboard($request): LengthAwarePaginator
     {
         return Product::query()
             ->when($request->filled('month'), fn($q) => $q->whereMonth('created_at', $request->input('month')))
@@ -46,6 +51,11 @@ class ProductService
         ]);
     }
 
+    /**
+     * @param $request
+     * @param Product $product
+     * @return Builder|Model
+     */
     public function update($request, Product $product): Builder|Model
     {
         $product = Product::query()

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\StatisticsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
@@ -34,5 +35,7 @@ Route::middleware(['auth:sanctum', 'role:seller|admin'])->group(function () {
     Route::post('/products', [ProductController::class, 'store']);
     Route::post('/products/{product}', [ProductController::class, 'update']);
     Route::delete('/products/{product}', [ProductController::class, 'destroy']);
+
+    Route::get('/statistics', [StatisticsController::class, 'filteredStatistics']);
 });
 

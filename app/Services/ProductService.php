@@ -27,7 +27,7 @@ class ProductService
             ->when($request->filled('id_from') && $request->filled('id_to'), function ($q) use ($request) {
                 $q->whereBetween('id', [$request->input('id_from'), $request->input('id_to')]);
             })
-            ->get();
+            ->paginate($request->input('per_page', 10));
     }
 
     /**
